@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Menu for Restaurants</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/ar.js@1.7.2/aframe/build/aframe-ar.min.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
+        <a-marker preset="custom" type="pattern" url="./assets/pattern-Gemini_Generated_Image.patt" 
+            emitevents="true">
+            <a-entity gltf-model="/assets/menu-item.glb" scale="1 1 1" position="0 0 0"></a-entity>
+        </a-marker>
+        <a-camera position="0 0 5"></a-camera>
+    </a-scene>
+
+    <script>
+        document.querySelector('a-marker').addEventListener('markerFound', () => {
+            console.log('Marker detected!');
+        });
+
+        document.querySelector('a-marker').addEventListener('markerLost', () => {
+            console.log('Marker lost!');
+        });
+
+        document.querySelector('a-entity').addEventListener('model-loaded', () => {
+            console.log('3D Model Loaded');
+        });
+
+        document.querySelector('a-entity').addEventListener('error', () => {
+            console.log('Failed to load 3D model');
+        });
+    </script>
+</body>
+</html>
